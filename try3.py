@@ -1555,7 +1555,7 @@ if st.session_state.results_ready:
             <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td><td style='color:#3FB950;'>✓</td>
             <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td></tr>
           <tr><td>Doka / PERI SW</td>
-            <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✓</td><td style='color:#F85149;'>✓</td>
+            <td style='color:#F85149;'>✗</td><td style='color:#3FB950;'>✓</td><td style='color:#3FB950;'>✓</td>
             <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td></tr>
           <tr style='background:rgba(232,97,26,0.08);'>
             <td class='td-orange'><b>FormOptiX ★</b></td>
