@@ -47,59 +47,111 @@ st.set_page_config(
 # ============================================================
 # CUSTOM CSS – Premium Dark Executive Theme
 # ============================================================
-st.markdown("""
+
+theme_mode = st.sidebar.radio("UI Theme", ["Dark Mode", "Light Mode"], horizontal=True)
+
+if theme_mode == "Light Mode":
+    BG = "#F8F9FA"
+    BG_SIDEBAR_START = "#F3F4F6"
+    BG_SIDEBAR_END = "#E5E7EB"
+    TEXT = "#1F2937"
+    MUTED = "#6B7280"
+    CARD_START = "#FFFFFF"
+    CARD_END = "#F8F9FA"
+    BORDER = "#E5E7EB"
+    BORDER_HOVER = "#D9480F"
+    ORANGE = "#D9480F"
+    GREEN = "#16A34A"
+    RED = "#DC2626"
+    TEAL = "#0F766E"
+    BLUE = "#2563EB"
+    AMBER = "#D97706"
+    TABLE_HEADER_BG = "#F3F4F6"
+    TABLE_ROW_EVEN = "#F9FAFB"
+    TABLE_ROW_HOVER = "rgba(217,72,15,0.06)"
+    CHART_BG = "#FFFFFF"
+    CHART_PAPER = "#F8F9FA"
+    GRAY = "#E5E7EB"
+    INPUT_BG = "#FFFFFF"
+    INPUT_BORDER = "#D1D5DB"
+else:
+    BG = "#0D1117"
+    BG_SIDEBAR_START = "#111827"
+    BG_SIDEBAR_END = "#0D1117"
+    TEXT = "#E6EDF3"
+    MUTED = "#8B949E"
+    CARD_START = "#161B22"
+    CARD_END = "#1C2128"
+    BORDER = "#30363D"
+    BORDER_HOVER = "#E8611A"
+    ORANGE = "#E8611A"
+    GREEN = "#3FB950"
+    RED = "#F85149"
+    TEAL = "#0D9488"
+    BLUE = "#388BFD"
+    AMBER = "#F5A623"
+    TABLE_HEADER_BG = "#1C2128"
+    TABLE_ROW_EVEN = "#161B22"
+    TABLE_ROW_HOVER = "rgba(232,97,26,0.06)"
+    CHART_BG = "#161B22"
+    CHART_PAPER = "#0D1117"
+    GRAY = "#30363D"
+    INPUT_BG = "#161B22"
+    INPUT_BORDER = "#30363D"
+
+st.markdown(f'''
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
   /* ── Base ── */
-  html, body, [class*="css"] {
+  html, body, [class*="css"] {{
     font-family: 'Space Grotesk', sans-serif;
-    background-color: #0D1117;
-    color: #E6EDF3;
-  }
-  .stApp { background: #0D1117; }
+    background-color: {BG};
+    color: {TEXT};
+  }}
+  .stApp {{ background: {BG}; }}
 
   /* ── Sidebar ── */
-  [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #111827 0%, #0D1117 100%);
-    border-right: 1px solid #21262D;
-  }
+  [data-testid="stSidebar"] {{
+    background: linear-gradient(180deg, {BG_SIDEBAR_START} 0%, {BG_SIDEBAR_END} 100%);
+    border-right: 1px solid {BORDER};
+  }}
   [data-testid="stSidebar"] .stMarkdown h1,
   [data-testid="stSidebar"] .stMarkdown h2,
-  [data-testid="stSidebar"] .stMarkdown h3 {
-    color: #E8611A;
-  }
+  [data-testid="stSidebar"] .stMarkdown h3 {{
+    color: {ORANGE};
+  }}
 
   /* ── Metric cards ── */
-  .metric-card {
-    background: linear-gradient(135deg, #161B22 0%, #1C2128 100%);
-    border: 1px solid #30363D;
+  .metric-card {{
+    background: linear-gradient(135deg, {CARD_START} 0%, {CARD_END} 100%);
+    border: 1px solid {BORDER};
     border-radius: 12px;
     padding: 20px 24px;
     margin: 6px 0;
     transition: border-color 0.2s;
-  }
-  .metric-card:hover { border-color: #E8611A; }
-  .metric-value {
+  }}
+  .metric-card:hover {{ border-color: {ORANGE}; }}
+  .metric-value {{
     font-size: 2.2rem;
     font-weight: 700;
-    color: #E8611A;
+    color: {ORANGE};
     font-family: 'JetBrains Mono', monospace;
     line-height: 1.1;
-  }
-  .metric-label {
+  }}
+  .metric-label {{
     font-size: 0.78rem;
-    color: #8B949E;
+    color: {MUTED};
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 4px;
-  }
-  .metric-delta-pos { color: #3FB950; font-size: 0.85rem; font-weight: 600; }
-  .metric-delta-neg { color: #F85149; font-size: 0.85rem; font-weight: 600; }
+  }}
+  .metric-delta-pos {{ color: {GREEN}; font-size: 0.85rem; font-weight: 600; }}
+  .metric-delta-neg {{ color: {RED}; font-size: 0.85rem; font-weight: 600; }}
 
   /* ── Section headers ── */
-  .section-header {
-    background: linear-gradient(90deg, #E8611A 0%, transparent 100%);
+  .section-header {{
+    background: linear-gradient(90deg, {ORANGE} 0%, transparent 100%);
     padding: 10px 20px;
     border-radius: 6px;
     margin: 24px 0 16px 0;
@@ -107,61 +159,62 @@ st.markdown("""
     font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-  }
+    color: {TEXT} !important;
+  }}
 
   /* ── Alert / callout boxes ── */
-  .callout-orange {
+  .callout-orange {{
     background: rgba(232, 97, 26, 0.12);
-    border-left: 4px solid #E8611A;
+    border-left: 4px solid {ORANGE};
     border-radius: 0 8px 8px 0;
     padding: 14px 18px;
     margin: 12px 0;
-  }
-  .callout-green {
+  }}
+  .callout-green {{
     background: rgba(63, 185, 80, 0.10);
-    border-left: 4px solid #3FB950;
+    border-left: 4px solid {GREEN};
     border-radius: 0 8px 8px 0;
     padding: 14px 18px;
     margin: 12px 0;
-  }
-  .callout-red {
+  }}
+  .callout-red {{
     background: rgba(248, 81, 73, 0.10);
-    border-left: 4px solid #F85149;
+    border-left: 4px solid {RED};
     border-radius: 0 8px 8px 0;
     padding: 14px 18px;
     margin: 12px 0;
-  }
-  .callout-teal {
+  }}
+  .callout-teal {{
     background: rgba(13, 148, 136, 0.10);
-    border-left: 4px solid #0D9488;
+    border-left: 4px solid {TEAL};
     border-radius: 0 8px 8px 0;
     padding: 14px 18px;
     margin: 12px 0;
-  }
+  }}
 
   /* ── Title hero ── */
-  .hero-title {
+  .hero-title {{
     font-size: 3rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #E8611A 0%, #F5A623 60%, #FFFFFF 100%);
+    background: linear-gradient(135deg, {ORANGE} 0%, {AMBER} 60%, {TEXT} 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: -1px;
     line-height: 1.05;
-  }
-  .hero-sub {
-    color: #8B949E;
+  }}
+  .hero-sub {{
+    color: {MUTED};
     font-size: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-top: 6px;
-  }
-  .hero-tag {
+  }}
+  .hero-tag {{
     display: inline-block;
     background: rgba(232, 97, 26, 0.15);
-    border: 1px solid #E8611A;
-    color: #E8611A;
+    border: 1px solid {ORANGE};
+    color: {ORANGE};
     padding: 3px 12px;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -169,45 +222,45 @@ st.markdown("""
     letter-spacing: 1px;
     margin-right: 8px;
     margin-top: 12px;
-  }
+  }}
 
   /* ── Table styling ── */
-  .custom-table {
+  .custom-table {{
     width: 100%;
     border-collapse: collapse;
     font-size: 0.88rem;
     margin: 12px 0;
-  }
-  .custom-table th {
-    background: #1C2128;
-    color: #E8611A;
+  }}
+  .custom-table th {{
+    background: {TABLE_HEADER_BG};
+    color: {ORANGE};
     padding: 10px 14px;
     text-align: left;
     font-weight: 600;
     letter-spacing: 0.5px;
-    border-bottom: 2px solid #E8611A;
-  }
-  .custom-table td {
+    border-bottom: 2px solid {ORANGE};
+  }}
+  .custom-table td {{
     padding: 9px 14px;
-    border-bottom: 1px solid #21262D;
-    color: #C9D1D9;
-  }
-  .custom-table tr:nth-child(even) td { background: #161B22; }
-  .custom-table tr:hover td { background: rgba(232,97,26,0.06); }
-  .td-green { color: #3FB950 !important; font-weight: 600; }
-  .td-orange { color: #E8611A !important; font-weight: 700; }
+    border-bottom: 1px solid {BORDER};
+    color: {TEXT};
+  }}
+  .custom-table tr:nth-child(even) td {{ background: {TABLE_ROW_EVEN}; }}
+  .custom-table tr:hover td {{ background: {TABLE_ROW_HOVER}; }}
+  .td-green {{ color: {GREEN} !important; font-weight: 600; }}
+  .td-orange {{ color: {ORANGE} !important; font-weight: 700; }}
 
   /* ── Plotly chart container ── */
-  .chart-container {
-    background: #161B22;
-    border: 1px solid #21262D;
+  .chart-container {{
+    background: {CARD_START};
+    border: 1px solid {BORDER};
     border-radius: 12px;
     padding: 4px;
     margin: 8px 0;
-  }
+  }}
 
   /* ── Phase badges ── */
-  .phase-badge {
+  .phase-badge {{
     display: inline-block;
     padding: 4px 14px;
     border-radius: 20px;
@@ -215,34 +268,34 @@ st.markdown("""
     font-weight: 700;
     letter-spacing: 0.5px;
     margin: 3px 2px;
-  }
-  .phase-0 { background: rgba(13,148,136,0.2); color: #0D9488; border: 1px solid #0D9488; }
-  .phase-1 { background: rgba(232,97,26,0.2); color: #E8611A; border: 1px solid #E8611A; }
-  .phase-2 { background: rgba(26,43,74,0.4); color: #79C0FF; border: 1px solid #388BFD; }
-  .phase-3 { background: rgba(245,166,35,0.2); color: #F5A623; border: 1px solid #F5A623; }
+  }}
+  .phase-0 {{ background: rgba(13,148,136,0.2); color: {TEAL}; border: 1px solid {TEAL}; }}
+  .phase-1 {{ background: rgba(232,97,26,0.2); color: {ORANGE}; border: 1px solid {ORANGE}; }}
+  .phase-2 {{ background: rgba(26,43,74,0.4); color: {BLUE}; border: 1px solid {BLUE}; }}
+  .phase-3 {{ background: rgba(245,166,35,0.2); color: {AMBER}; border: 1px solid {AMBER}; }}
 
   /* ── Divider ── */
-  .orange-divider {
+  .orange-divider {{
     height: 2px;
-    background: linear-gradient(90deg, #E8611A, transparent);
+    background: linear-gradient(90deg, {ORANGE}, transparent);
     border: none;
     margin: 20px 0;
-  }
+  }}
 
   /* ── Streamlit overrides ── */
-  .stSlider > div > div > div > div { background: #E8611A !important; }
-  .stSelectbox > div > div { background: #161B22; border-color: #30363D; }
-  .stNumberInput > div > div > input { background: #161B22; border-color: #30363D; color: #E6EDF3; }
-  div[data-testid="stMetric"] {
-    background: #161B22;
-    border: 1px solid #30363D;
+  .stSlider > div > div > div > div {{ background: {ORANGE} !important; }}
+  .stSelectbox > div > div {{ background: {INPUT_BG}; border-color: {INPUT_BORDER}; }}
+  .stNumberInput > div > div > input {{ background: {INPUT_BG}; border-color: {INPUT_BORDER}; color: {TEXT}; }}
+  div[data-testid="stMetric"] {{
+    background: {CARD_START};
+    border: 1px solid {BORDER};
     border-radius: 10px;
     padding: 14px;
-  }
-  div[data-testid="stMetric"] label { color: #8B949E !important; }
-  div[data-testid="stMetric"] [data-testid="stMetricValue"] { color: #E8611A !important; font-family: 'JetBrains Mono', monospace; }
-  .stButton > button {
-    background: linear-gradient(135deg, #E8611A, #F5A623);
+  }}
+  div[data-testid="stMetric"] label {{ color: {MUTED} !important; }}
+  div[data-testid="stMetric"] [data-testid="stMetricValue"] {{ color: {ORANGE} !important; font-family: 'JetBrains Mono', monospace; }}
+  .stButton > button {{
+    background: linear-gradient(135deg, {ORANGE}, {AMBER});
     color: white;
     border: none;
     border-radius: 8px;
@@ -250,36 +303,25 @@ st.markdown("""
     letter-spacing: 0.5px;
     padding: 10px 28px;
     transition: opacity 0.2s;
-  }
-  .stButton > button:hover { opacity: 0.85; }
-  h1, h2, h3 { color: #E6EDF3 !important; }
-  .stTabs [data-baseweb="tab"] { color: #8B949E; }
-  .stTabs [aria-selected="true"] { color: #E8611A !important; border-bottom-color: #E8611A !important; }
+  }}
+  .stButton > button:hover {{ opacity: 0.85; }}
+  h1, h2, h3 {{ color: {TEXT} !important; }}
+  .stTabs [data-baseweb="tab"] {{ color: {MUTED}; }}
+  .stTabs [aria-selected="true"] {{ color: {ORANGE} !important; border-bottom-color: {ORANGE} !important; }}
 </style>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
+
 
 
 # ============================================================
 # CHART THEME
 # ============================================================
-CHART_BG    = "#161B22"
-CHART_PAPER = "#0D1117"
-ORANGE      = "#E8611A"
-AMBER       = "#F5A623"
-TEAL        = "#0D9488"
-GREEN       = "#3FB950"
-RED         = "#F85149"
-BLUE        = "#388BFD"
-GRAY        = "#30363D"
-TEXT        = "#C9D1D9"
-MUTED       = "#8B949E"
-
 def apply_chart_theme(fig, title="", height=400):
     fig.update_layout(
         paper_bgcolor=CHART_PAPER,
         plot_bgcolor=CHART_BG,
         font=dict(family="Space Grotesk", color=TEXT, size=12),
-        title=dict(text=title, font=dict(color="#E6EDF3", size=15, family="Space Grotesk"), x=0.02, xanchor="left"),
+        title=dict(text=title, font=dict(color="{TEXT}", size=15, family="Space Grotesk"), x=0.02, xanchor="left"),
         height=height,
         margin=dict(l=50, r=30, t=50, b=50),
         legend=dict(
@@ -551,7 +593,7 @@ def make_gauge(score, threshold=75):
         value=score,
         delta={"reference": threshold, "increasing": {"color": GREEN}, "decreasing": {"color": RED}},
         number={"suffix": "%", "font": {"size": 42, "color": color, "family": "JetBrains Mono"}},
-        title={"text": "Repetition Score<br><span style='font-size:11px;color:#8B949E'>Kitting optimization triggers at >75%</span>",
+        title={"text": "Repetition Score<br><span style='font-size:11px;color:{MUTED}'>Kitting optimization triggers at >75%</span>",
                "font": {"size": 14, "color": TEXT}},
         gauge={
             "axis": {"range": [0, 100], "tickcolor": MUTED, "tickfont": {"color": MUTED}},
@@ -746,7 +788,7 @@ def make_floor_heatmap(df_floors):
         z=pivot.values,
         x=pivot.columns.tolist(),
         y=pivot.index.tolist(),
-        colorscale=[[0, CHART_BG],[0.3, "#1C4B6B"],[0.6, ORANGE],[1.0, AMBER]],
+        colorscale=[[0, CHART_BG],[0.3, BLUE],[0.6, ORANGE],[1.0, AMBER]],
         text=np.round(pivot.values, 1),
         texttemplate="%{text}",
         textfont=dict(size=11, color=TEXT),
@@ -826,15 +868,15 @@ def load_real_project_data(uploaded_file):
 # ============================================================
 with st.sidebar:
 
-    st.markdown("""
+    st.markdown(f"""
     <div style='text-align:center; padding: 16px 0 8px 0;'>
-      <div style='font-size:2rem; font-weight:900; background:linear-gradient(135deg,#E8611A,#F5A623);
+      <div style='font-size:2rem; font-weight:900; background:linear-gradient(135deg,{ORANGE},{AMBER});
                   -webkit-background-clip:text; -webkit-text-fill-color:transparent;'>FormOptiX</div>
-      <div style='font-size:0.68rem; color:#8B949E; letter-spacing:2px; text-transform:uppercase; margin-top:4px;'>
+      <div style='font-size:0.68rem; color:{MUTED}; letter-spacing:2px; text-transform:uppercase; margin-top:4px;'>
         Repetition Intelligence Engine
       </div>
     </div>
-    <hr style='border-color:#21262D; margin:12px 0;'>
+    <hr style='border-color:{BORDER}; margin:12px 0;'>
     """, unsafe_allow_html=True)
 
     st.markdown("### ⚙️ Project Parameters")
@@ -847,23 +889,23 @@ with st.sidebar:
     repetition_threshold = st.slider("Repetition Score Trigger (%)", 50, 90, 75, 5)
     seed = st.number_input("Random Seed", value=42, step=1)
 
-    st.markdown("<hr style='border-color:#21262D;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='border-color:{BORDER};'>", unsafe_allow_html=True)
 
     st.markdown("### 🔩 Panel Unit Costs (₹)")
     wall_cost = st.number_input("Wall Panel", value=8000, step=500)
     slab_cost = st.number_input("Slab Panel", value=12000, step=500)
     col_cost  = st.number_input("Column Panel", value=6000, step=500)
 
-    st.markdown("<hr style='border-color:#21262D;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='border-color:{BORDER};'>", unsafe_allow_html=True)
 
     run_btn = st.button("🚀  Run FormOptiX Engine", use_container_width=True)
 
-    st.markdown("""
-    <hr style='border-color:#21262D;'>
-    <div style='font-size:0.72rem; color:#8B949E; line-height:1.6;'>
-      <b style='color:#E8611A;'>CreaTech '26</b> · L&T<br>
+    st.markdown(f"""
+    <hr style='border-color:{BORDER};'>
+    <div style='font-size:0.72rem; color:{MUTED}; line-height:1.6;'>
+      <b style='color:{ORANGE};'>CreaTech '26</b> · L&T<br>
       Problem Statement 4<br>
-      <span style='color:#3FB950;'>#JustLeap</span>
+      <span style='color:{GREEN};'>#JustLeap</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -873,7 +915,7 @@ with st.sidebar:
 # ============================================================
 col_hero, col_tag = st.columns([3, 1])
 with col_hero:
-    st.markdown("""
+    st.markdown(f"""
     <div style='padding: 24px 0 8px 0;'>
       <div class='hero-title'>FormOptiX</div>
       <div class='hero-sub'>Intelligent Formwork &amp; BoQ Optimizer</div>
@@ -886,9 +928,9 @@ with col_hero:
     </div>
     """, unsafe_allow_html=True)
 with col_tag:
-    st.markdown("""
-    <div style='text-align:right; padding-top:28px; color:#8B949E; font-size:0.8rem; line-height:1.8;'>
-      <div style='color:#E8611A; font-weight:700; font-size:1.0rem;'>AI-Driven</div>
+    st.markdown(f"""
+    <div style='text-align:right; padding-top:28px; color:{MUTED}; font-size:0.8rem; line-height:1.8;'>
+      <div style='color:{ORANGE}; font-weight:700; font-size:1.0rem;'>AI-Driven</div>
       DBSCAN Clustering<br>
       LP Optimization<br>
       Dynamic BoQ
@@ -914,7 +956,7 @@ if st.session_state.last_mode != mode:
 # ── For Real Site Data: show the uploader persistently (outside run_btn)
 uploaded_file = None
 if mode == "Real Site Data":
-    st.markdown("""
+    st.markdown(f"""
     <div class='callout-teal' style='margin-bottom:16px;'>
       <b>📂 Upload your project Excel file</b><br>
       Required sheets: <code>floors</code> (floor geometry) and <code>schedule</code> (weekly demand).
@@ -935,9 +977,9 @@ if mode == "Real Site Data":
 
     # ── Phase 2 – BIM CSV Export ──────────────────────────────────
     with st.expander("📐 Phase 2 – BIM CSV Export (Revit → Floor Geometry)", expanded=False):
-        st.markdown("""
-        <div style='font-size:0.88rem; color:#C9D1D9; line-height:1.7;'>
-          <b style='color:#388BFD;'>Phase 2 – BIM Export & IFC Parsing Workflow</b><br>
+        st.markdown(f"""
+        <div style='font-size:0.88rem; color:{TEXT}; line-height:1.7;'>
+          <b style='color:{BLUE};'>Phase 2 – BIM Export & IFC Parsing Workflow</b><br>
           <i>How geometry comes automatically:</i><br>
           <b>1. Revit Export:</b> 3D model data exported via automated API plugin.<br>
           <b>2. IFC File Parsing:</b> Python (IfcOpenShell) digests <code>IfcSlab</code> and <code>IfcWall</code> to compute area/length.<br>
@@ -968,13 +1010,13 @@ if mode == "Real Site Data":
 
     # ── Phase 3 – ERP Integration ─────────────────────────────────
     with st.expander("🔗 Phase 3 – ERP Integration (Enterprise)", expanded=False):
-        st.markdown("""
+        st.markdown(f"""
         <div class='callout-orange' style='margin-bottom:10px;'>
           <b>⚠️ Enterprise Feature</b> — ERP integration is designed for Phase 3 (18–36 months).
           This panel lets you configure connection parameters for future live deployment.
         </div>
-        <div style='font-size:0.88rem; color:#C9D1D9; line-height:1.7;'>
-          <b style='color:#F5A623;'>Phase 3 – ERP Integration</b><br>
+        <div style='font-size:0.88rem; color:{TEXT}; line-height:1.7;'>
+          <b style='color:{AMBER};'>Phase 3 – ERP Integration</b><br>
           Connect FormOptiX to your SAP / Oracle ERP to pull live procurement orders,
           inventory levels, and vendor lead times in real-time.
         </div>
@@ -1072,7 +1114,7 @@ if st.session_state.results_ready:
             st.markdown(f"""
             <div class='callout-red' style='border-left:4px solid {RED};'>
               <b style='color:{RED}; font-size:1.03rem;'>⚠ Data Quality Warning – Optimization reliability reduced.</b><br>
-              <span style='font-size:0.88rem; color:#C9D1D9;'>
+              <span style='font-size:0.88rem; color:{TEXT};'>
                 Data Quality Score: <b style='color:{dq_color};'>{dq_score}% ({dq_label})</b><br>
                 Issues detected:
                 <ul style='margin:6px 0; padding-left:18px; font-size:0.85rem;'>{warn_html}</ul>
@@ -1084,7 +1126,7 @@ if st.session_state.results_ready:
             st.markdown(f"""
             <div class='callout-green' style='padding:10px 16px;'>
               <b style='color:{GREEN};'>{dq_icon} Data Quality Score: {dq_score}% — {dq_label}</b>
-              &nbsp;&nbsp;<span style='color:#8B949E; font-size:0.85rem;'>All checks passed. Optimization reliability is high.</span>
+              &nbsp;&nbsp;<span style='color:{MUTED}; font-size:0.85rem;'>All checks passed. Optimization reliability is high.</span>
             </div>
             """, unsafe_allow_html=True)
 
@@ -1092,7 +1134,7 @@ if st.session_state.results_ready:
     if rep_score > repetition_threshold:
         st.markdown(f"""
         <div class='callout-green'>
-          <b style='color:#3FB950; font-size:1.05rem;'>✅ KITTING OPTIMIZATION TRIGGERED</b><br>
+          <b style='color:{GREEN}; font-size:1.05rem;'>✅ KITTING OPTIMIZATION TRIGGERED</b><br>
           Repetition Score <b>{rep_score}%</b> exceeds threshold of <b>{repetition_threshold}%</b>.
           FormOptiX LP Optimizer is now active. Procurement plan generated for 52-week schedule.
         </div>
@@ -1100,7 +1142,7 @@ if st.session_state.results_ready:
     else:
         st.markdown(f"""
         <div class='callout-red'>
-          <b style='color:#F85149; font-size:1.05rem;'>⚠️ DESIGN FREEZE INTELLIGENCE ALERT</b><br>
+          <b style='color:{RED}; font-size:1.05rem;'>⚠️ DESIGN FREEZE INTELLIGENCE ALERT</b><br>
           Repetition Score <b>{rep_score}%</b> is below threshold of <b>{repetition_threshold}%</b>.
           High design variability detected. <b>Recommend delaying bulk procurement</b> until design stabilizes.
         </div>
@@ -1162,7 +1204,7 @@ if st.session_state.results_ready:
 
             # Cluster table
             st.markdown("**Cluster Summary**")
-            st.markdown("""
+            st.markdown(f"""
             <table class='custom-table'>
               <tr><th>Cluster</th><th>Floor Count</th><th>Avg Slab (sqm)</th><th>Avg Wall (m)</th></tr>
             """ + "".join([
@@ -1181,11 +1223,11 @@ if st.session_state.results_ready:
 
         # Design Freeze Module
         st.markdown("<div class='section-header'>🔒 Design Freeze Intelligence</div>", unsafe_allow_html=True)
-        st.markdown("""
+        st.markdown(f"""
         <div class='callout-teal'>
           <b>Simulating 3 design revision cycles...</b><br>
           FormOptiX monitors BIM version history and recalculates Repetition Score after each revision.<br><br>
-          <span style='font-size:0.85rem; color:#8B949E;'>
+          <span style='font-size:0.85rem; color:{MUTED};'>
             <b>How is the 15% threshold decided?</b><br>
             • <i>Historical Variance Analysis:</i> Derived from residential tower revision histories.<br>
             • <i>Sensitivity Testing:</i> Identifies where excess carrying cost outweighs material value.<br>
@@ -1250,8 +1292,8 @@ if st.session_state.results_ready:
         roi_c1, roi_c2, roi_c3, roi_c4 = st.columns(4)
         with roi_c1:
             st.markdown(f"""
-            <div class='metric-card' style='border-color:#3FB950;'>
-              <div class='metric-value' style='color:#3FB950;'>₹{savings_cr:.2f} Cr</div>
+            <div class='metric-card' style='border-color:{GREEN};'>
+              <div class='metric-value' style='color:{GREEN};'>₹{savings_cr:.2f} Cr</div>
               <div class='metric-label'>Total Projected Savings</div>
               <div class='metric-delta-pos'>per ₹{project_cost} Cr project</div>
             </div>
@@ -1266,16 +1308,16 @@ if st.session_state.results_ready:
             """, unsafe_allow_html=True)
         with roi_c3:
             st.markdown(f"""
-            <div class='metric-card' style='border-color:#0D9488;'>
-              <div class='metric-value' style='color:#0D9488;'>₹{opt_total_cr:.2f} Cr</div>
+            <div class='metric-card' style='border-color:{TEAL};'>
+              <div class='metric-value' style='color:{TEAL};'>₹{opt_total_cr:.2f} Cr</div>
               <div class='metric-label'>FormOptiX Optimized Cost</div>
               <div class='metric-delta-pos'>LP-optimized procurement</div>
             </div>
             """, unsafe_allow_html=True)
         with roi_c4:
             st.markdown(f"""
-            <div class='metric-card' style='border-color:#F5A623;'>
-              <div class='metric-value' style='color:#F5A623;'>{saving_pct:.1f}%</div>
+            <div class='metric-card' style='border-color:{AMBER};'>
+              <div class='metric-value' style='color:{AMBER};'>{saving_pct:.1f}%</div>
               <div class='metric-label'>Cost Reduction</div>
               <div class='metric-delta-pos'>vs manual planning</div>
             </div>
@@ -1339,7 +1381,7 @@ if st.session_state.results_ready:
             """, unsafe_allow_html=True)
 
         st.markdown(f"""
-        <div style='font-size:0.78rem; color:#8B949E; margin-top:12px; font-style:italic;'>
+        <div style='font-size:0.78rem; color:{MUTED}; margin-top:12px; font-style:italic;'>
           * Projections based on simulation modelled on industry benchmarks (CIDC, L&T internal norms).
           Pilot validation planned for Phase 1. LP Solver status: <b>{lp_results["status"]}</b>
         </div>
@@ -1352,7 +1394,7 @@ if st.session_state.results_ready:
         st.plotly_chart(make_inventory_curve(lp_results, df_schedule["week"].values), use_container_width=True)
         st.plotly_chart(make_forecast_chart(weeks, demand, forecast, upper, lower), use_container_width=True)
 
-        st.markdown("""
+        st.markdown(f"""
         <div class='callout-orange' style='margin-bottom:16px;'>
           <b style='font-size:1.05rem;'>Why is Forecasting Needed When Schedule is Known?</b><br>
           <div style='font-size:0.9rem; margin-top:4px;'>
@@ -1376,8 +1418,8 @@ if st.session_state.results_ready:
             col.markdown(f"""
             <div class='metric-card'>
               <span class='phase-badge {cls}'>{phase}</span>
-              <div style='font-weight:600; color:#E6EDF3; margin-top:8px;'>{src}</div>
-              <div style='font-size:0.8rem; color:#8B949E; margin-top:4px;'>{desc}</div>
+              <div style='font-weight:600; color:{TEXT}; margin-top:8px;'>{src}</div>
+              <div style='font-size:0.8rem; color:{MUTED}; margin-top:4px;'>{desc}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -1425,7 +1467,7 @@ if st.session_state.results_ready:
             font=dict(family="Space Grotesk", color=TEXT),
             height=300,
             margin=dict(l=20, r=20, t=40, b=20),
-            title=dict(text="Floor Type Distribution", font=dict(color="#E6EDF3", size=14)),
+            title=dict(text="Floor Type Distribution", font=dict(color="{TEXT}", size=14)),
             legend=dict(bgcolor="rgba(22,27,34,0.8)", bordercolor=GRAY, borderwidth=1, font=dict(color=TEXT))
         )
         fig_donut.add_annotation(
@@ -1481,13 +1523,13 @@ if st.session_state.results_ready:
         ]
         cols = st.columns(4)
         for col, (tag, time_r, title, color, items, kpi) in zip(cols, phases):
-            items_html = "".join([f"<li style='margin:5px 0; color:#C9D1D9;'>{it}</li>" for it in items])
+            items_html = "".join([f"<li style='margin:5px 0; color:{TEXT};'>{it}</li>" for it in items])
             col.markdown(f"""
-            <div style='background:#161B22; border:1px solid #30363D; border-radius:12px;
+            <div style='background:{CARD_START}; border:1px solid {GRAY}; border-radius:12px;
                         border-top:4px solid #{color}; padding:16px; height:340px;'>
               <div style='color:#{color}; font-weight:700; font-size:0.78rem; letter-spacing:1px;'>{tag}</div>
-              <div style='color:#8B949E; font-size:0.75rem;'>{time_r}</div>
-              <div style='color:#E6EDF3; font-weight:700; font-size:1.1rem; margin:8px 0;'>{title}</div>
+              <div style='color:{MUTED}; font-size:0.75rem;'>{time_r}</div>
+              <div style='color:{TEXT}; font-weight:700; font-size:1.1rem; margin:8px 0;'>{title}</div>
               <ul style='padding-left:16px; font-size:0.82rem; margin:0;'>{items_html}</ul>
               <div style='margin-top:12px; background:rgba({int(color[:2],16)},{int(color[2:4],16)},{int(color[4:],16)},0.15);
                           border-radius:6px; padding:8px; font-size:0.78rem; color:#{color}; font-weight:600;'>
@@ -1529,16 +1571,16 @@ if st.session_state.results_ready:
         ]
         for col, title, color, desc in novelties:
             col.markdown(f"""
-            <div style='background:#161B22; border:1px solid #{color.replace("#","") if "#" not in color else color[1:]}33;
+            <div style='background:{CARD_START}; border:1px solid #{color.replace("#","") if "#" not in color else color[1:]}33;
                         border-left:4px solid {color}; border-radius:8px; padding:16px;'>
               <div style='font-weight:700; color:{color}; font-size:1.0rem; margin-bottom:10px;'>{title}</div>
-              <div style='font-size:0.84rem; color:#C9D1D9; line-height:1.6;'>{desc}</div>
+              <div style='font-size:0.84rem; color:{TEXT}; line-height:1.6;'>{desc}</div>
             </div>
             """, unsafe_allow_html=True)
 
         # Competitive table
         st.markdown("<br><div class='section-header'>⚔️ Competitive Landscape</div>", unsafe_allow_html=True)
-        st.markdown("""
+        st.markdown(f"""
         <table class='custom-table'>
           <tr>
             <th>Tool</th>
@@ -1546,21 +1588,21 @@ if st.session_state.results_ready:
             <th>Repetition Intelligence</th><th>Cross-Project</th><th>Digital Twin</th>
           </tr>
           <tr><td>Primavera P6</td>
-            <td style='color:#3FB950;'>✓</td><td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td>
-            <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td></tr>
+            <td style='color:{GREEN};'>✓</td><td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td>
+            <td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td></tr>
           <tr><td>SAP ERP</td>
-            <td style='color:#F85149;'>✗</td><td style='color:#3FB950;'>✓</td><td style='color:#F85149;'>✗</td>
-            <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td></tr>
+            <td style='color:{RED};'>✗</td><td style='color:{GREEN};'>✓</td><td style='color:{RED};'>✗</td>
+            <td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td></tr>
           <tr><td>BIM (Revit)</td>
-            <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td><td style='color:#3FB950;'>✓</td>
-            <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td></tr>
+            <td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td><td style='color:{GREEN};'>✓</td>
+            <td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td></tr>
           <tr><td>Doka / PERI SW</td>
-            <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td>
-            <td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td><td style='color:#F85149;'>✗</td></tr>
+            <td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td>
+            <td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td><td style='color:{RED};'>✗</td></tr>
           <tr style='background:rgba(232,97,26,0.08);'>
             <td class='td-orange'><b>FormOptiX ★</b></td>
-            <td style='color:#3FB950;'><b>✓</b></td><td style='color:#3FB950;'><b>✓</b></td><td style='color:#3FB950;'><b>✓</b></td>
-            <td style='color:#3FB950;'><b>✓</b></td><td style='color:#3FB950;'><b>✓</b></td><td style='color:#3FB950;'><b>✓</b></td>
+            <td style='color:{GREEN};'><b>✓</b></td><td style='color:{GREEN};'><b>✓</b></td><td style='color:{GREEN};'><b>✓</b></td>
+            <td style='color:{GREEN};'><b>✓</b></td><td style='color:{GREEN};'><b>✓</b></td><td style='color:{GREEN};'><b>✓</b></td>
           </tr>
         </table>
         """, unsafe_allow_html=True)
@@ -1570,40 +1612,40 @@ if st.session_state.results_ready:
     # ============================================================
     st.markdown("<hr class='orange-divider'>", unsafe_allow_html=True)
     st.markdown(f"""
-    <div style='background:linear-gradient(135deg,#161B22,#1C2128); border:1px solid #E8611A33;
+    <div style='background:linear-gradient(135deg,{CARD_START},{CARD_END}); border:1px solid {ORANGE}33;
                 border-radius:12px; padding:28px 32px; text-align:center; margin:16px 0;'>
-      <div style='font-size:0.75rem; color:#8B949E; letter-spacing:2px; text-transform:uppercase;
+      <div style='font-size:0.75rem; color:{MUTED}; letter-spacing:2px; text-transform:uppercase;
                   margin-bottom:12px;'>The FormOptiX Pitch</div>
-      <div style='font-size:1.35rem; color:#E8611A; font-style:italic; font-weight:500; line-height:1.6;'>
+      <div style='font-size:1.35rem; color:{ORANGE}; font-style:italic; font-weight:500; line-height:1.6;'>
         "FormOptiX is the GPS for formwork — it tells you exactly which panels to reuse,
         when to order, and how much you'll save, before a single slab is poured."
       </div>
       <div style='margin-top:20px; display:flex; justify-content:center; gap:24px; flex-wrap:wrap;'>
-        <span style='color:#3FB950; font-weight:700;'>₹{savings_cr:.2f} Cr savings</span>
-        <span style='color:#8B949E;'>·</span>
-        <span style='color:#F5A623; font-weight:700;'>+22pp utilization</span>
-        <span style='color:#8B949E;'>·</span>
-        <span style='color:#0D9488; font-weight:700;'>~90% faster BoQ</span>
-        <span style='color:#8B949E;'>·</span>
-        <span style='color:#388BFD; font-weight:700;'>Repetition Score: {rep_score}%</span>
+        <span style='color:{GREEN}; font-weight:700;'>₹{savings_cr:.2f} Cr savings</span>
+        <span style='color:{MUTED};'>·</span>
+        <span style='color:{AMBER}; font-weight:700;'>+22pp utilization</span>
+        <span style='color:{MUTED};'>·</span>
+        <span style='color:{TEAL}; font-weight:700;'>~90% faster BoQ</span>
+        <span style='color:{MUTED};'>·</span>
+        <span style='color:{BLUE}; font-weight:700;'>Repetition Score: {rep_score}%</span>
       </div>
-      <div style='margin-top:16px; font-size:0.85rem; color:#8B949E;'>
-        CreaTech '26 · L&T · Problem Statement 4 · <b style='color:#E8611A;'>#JustLeap</b>
+      <div style='margin-top:16px; font-size:0.85rem; color:{MUTED};'>
+        CreaTech '26 · L&T · Problem Statement 4 · <b style='color:{ORANGE};'>#JustLeap</b>
       </div>
     </div>
     """, unsafe_allow_html=True)
 
 else:
     # Pre-run state
-    st.markdown("""
+    st.markdown(f"""
     <div style='text-align:center; padding:80px 20px;'>
       <div style='font-size:4rem; margin-bottom:16px;'>🏗️</div>
-      <div style='font-size:1.5rem; color:#E8611A; font-weight:700; margin-bottom:12px;'>
+      <div style='font-size:1.5rem; color:{ORANGE}; font-weight:700; margin-bottom:12px;'>
         Ready to Optimize
       </div>
-      <div style='color:#8B949E; font-size:1rem; max-width:480px; margin:0 auto; line-height:1.7;'>
+      <div style='color:{MUTED}; font-size:1rem; max-width:480px; margin:0 auto; line-height:1.7;'>
         Configure your project parameters in the sidebar and click
-        <b style='color:#E8611A;'>Run FormOptiX Engine</b> to generate the full analysis.
+        <b style='color:{ORANGE};'>Run FormOptiX Engine</b> to generate the full analysis.
       </div>
     </div>
     """, unsafe_allow_html=True)
