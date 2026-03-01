@@ -879,7 +879,7 @@ with col_hero:
       <div class='hero-sub'>Intelligent Formwork &amp; BoQ Optimizer</div>
       <div style='margin-top:12px;'>
         <span class='hero-tag'>CreaTech '26</span>
-        <span class='hero-tag'>L&amp;T · PS-4</span>
+        <span class='hero-tag'>Era_GatiShaktiVishwavidyalaya · PS-4</span>
         <span class='hero-tag'>Repetition Intelligence</span>
         <span class='hero-tag'>#JustLeap</span>
       </div>
@@ -1588,7 +1588,7 @@ if st.session_state.results_ready:
         <span style='color:#388BFD; font-weight:700;'>Repetition Score: {rep_score}%</span>
       </div>
       <div style='margin-top:16px; font-size:0.85rem; color:#8B949E;'>
-        CreaTech '26 · L&T · Problem Statement 4 · <b style='color:#E8611A;'>#JustLeap</b>
+        CreaTech '26 · L&T · Era_GatiShaktiVishwavidyalaya · <b style='color:#E8611A;'>#JustLeap</b>
       </div>
     </div>
     """, unsafe_allow_html=True)
